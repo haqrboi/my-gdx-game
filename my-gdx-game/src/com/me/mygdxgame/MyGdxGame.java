@@ -31,13 +31,12 @@ public class MyGdxGame implements ApplicationListener {
 		TextureRegion region = new TextureRegion(texture, 0, 0, 512, 275);
 		
 		sprite = new Sprite(region);
-		sprite.setSize(0.5f, 0.5f * sprite.getHeight() / sprite.getWidth());
+		sprite.setSize(0.3f, 0.3f * sprite.getHeight() / sprite.getWidth());
 		//sprite.setOrigin(0.0f, 0.0f);
 		sprite.setPosition(0, -sprite.getHeight());
 	}
 
-
-
+    // a comment
 
 	@Override
 	public void dispose() {
