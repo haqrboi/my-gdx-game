@@ -36,11 +36,15 @@ public class MyGdxGame implements ApplicationListener {
 		sprite.setPosition(0, -sprite.getHeight());
 	}
 
+
+
+
 	@Override
 	public void dispose() {
 		batch.dispose();
 		texture.dispose();
 	}
+
 
 	@Override
 	public void render() {		
