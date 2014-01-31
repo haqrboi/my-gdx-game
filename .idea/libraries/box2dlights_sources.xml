@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="box2dlights-sources">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../box2dlights/box2dlights-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

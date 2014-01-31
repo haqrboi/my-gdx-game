@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_my-gdx-game-desktop" default="compile.module.my-gdx-game-desktop">
+  <dirname property="module.my-gdx-game-desktop.basedir" file="${ant.file.module_my-gdx-game-desktop}"/>
+  
+  <property name="module.jdk.home.my-gdx-game-desktop" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.my-gdx-game-desktop" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.my-gdx-game-desktop" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.my-gdx-game-desktop" value="-encoding UTF-8 -source 1.6 ${compiler.args}"/>
+  
+  <property name="my-gdx-game-desktop.output.dir" value="${module.my-gdx-game-desktop.basedir}/bin"/>
+  <property name="my-gdx-game-desktop.testoutput.dir" value="${module.my-gdx-game-desktop.basedir}/bin"/>
+  
+  <path id="my-gdx-game-desktop.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="my-gdx-game-desktop.module.production.classpath">
+    <pathelement location="${my-gdx-game.output.dir}"/>
+    <pathelement location="${basedir}/my-gdx-game/libs/gdx.jar"/>
+    <pathelement location="${basedir}/my-gdx-game/libs/bodyeditor-loader.jar"/>
+    <pathelement location="${basedir}/my-gdx-game/libs/tween-engine-api.jar"/>
+    <path refid="${module.jdk.classpath.my-gdx-game-desktop}"/>
+    <pathelement location="${basedir}/my-gdx-game-desktop/libs/gdx-backend-lwjgl.jar"/>
+    <pathelement location="${basedir}/my-gdx-game-desktop/libs/gdx-backend-lwjgl-natives.jar"/>
+    <pathelement location="${basedir}/my-gdx-game-desktop/libs/gdx-natives.jar"/>
+  </path>
+  
+  <path id="my-gdx-game-desktop.runtime.production.module.classpath">
+    <pathelement location="${my-gdx-game-desktop.output.dir}"/>
+    <path refid="my-gdx-game.runtime.production.module.classpath"/>
+    <pathelement location="${basedir}/my-gdx-game-desktop/libs/gdx-backend-lwjgl.jar"/>
+    <pathelement location="${basedir}/my-gdx-game-desktop/libs/gdx-backend-lwjgl-natives.jar"/>
+    <pathelement location="${basedir}/my-gdx-game-desktop/libs/gdx-natives.jar"/>
+  </path>
+  
+  <path id="my-gdx-game-desktop.module.classpath">
+    <pathelement location="${my-gdx-game-desktop.output.dir}"/>
+    <pathelement location="${my-gdx-game.output.dir}"/>
+    <pathelement location="${basedir}/my-gdx-game/libs/gdx.jar"/>
+    <pathelement location="${basedir}/my-gdx-game/libs/bodyeditor-loader.jar"/>
+    <pathelement location="${basedir}/my-gdx-game/libs/tween-engine-api.jar"/>
+    <path refid="${module.jdk.classpath.my-gdx-game-desktop}"/>
+    <pathelement location="${basedir}/my-gdx-game-desktop/libs/gdx-backend-lwjgl.jar"/>
+    <pathelement location="${basedir}/my-gdx-game-desktop/libs/gdx-backend-lwjgl-natives.jar"/>
+    <pathelement location="${basedir}/my-gdx-game-desktop/libs/gdx-natives.jar"/>
+  </path>
+  
+  <path id="my-gdx-game-desktop.runtime.module.classpath">
+    <pathelement location="${my-gdx-game-desktop.output.dir}"/>
+    <path refid="my-gdx-game.runtime.module.classpath"/>
+    <pathelement location="${basedir}/my-gdx-game-desktop/libs/gdx-backend-lwjgl.jar"/>
+    <pathelement location="${basedir}/my-gdx-game-desktop/libs/gdx-backend-lwjgl-natives.jar"/>
+    <pathelement location="${basedir}/my-gdx-game-desktop/libs/gdx-natives.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.my-gdx-game-desktop">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.my-gdx-game-desktop">
+    <patternset refid="excluded.from.module.my-gdx-game-desktop"/>
+  </patternset>
+  
+  <path id="my-gdx-game-desktop.module.sourcepath">
+    <dirset dir="${module.my-gdx-game-desktop.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.my-gdx-game-desktop" depends="compile.module.my-gdx-game-desktop.production,compile.module.my-gdx-game-desktop.tests" description="Compile module my-gdx-game-desktop"/>
+  
+  <target name="compile.module.my-gdx-game-desktop.production" depends="register.custom.compilers,compile.module.my-gdx-game" description="Compile module my-gdx-game-desktop; production classes">
+    <mkdir dir="${my-gdx-game-desktop.output.dir}"/>
+    <javac2 destdir="${my-gdx-game-desktop.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.my-gdx-game-desktop}/javac">
+      <compilerarg line="${compiler.args.my-gdx-game-desktop}"/>
+      <bootclasspath refid="my-gdx-game-desktop.module.bootclasspath"/>
+      <classpath refid="my-gdx-game-desktop.module.production.classpath"/>
+      <src refid="my-gdx-game-desktop.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.my-gdx-game-desktop"/>
+    </javac2>
+    
+    <copy todir="${my-gdx-game-desktop.output.dir}">
+      <fileset dir="${module.my-gdx-game-desktop.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.my-gdx-game-desktop.tests" depends="register.custom.compilers,compile.module.my-gdx-game-desktop.production" description="compile module my-gdx-game-desktop; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.my-gdx-game-desktop" description="cleanup module">
+    <delete dir="${my-gdx-game-desktop.output.dir}"/>
+    <delete dir="${my-gdx-game-desktop.testoutput.dir}"/>
+  </target>
+</project>
